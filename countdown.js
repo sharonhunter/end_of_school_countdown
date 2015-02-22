@@ -11,7 +11,8 @@ function totalDays() {
     
     var ms_per_day = 24 * 60 * 60 * 1000;
     var time_left_ms = (end_of_school.getTime() - today.getTime());
-    var days_left = Math.floor(time_left_ms / ms_per_day);
+    //Math.ceil makes end_date inclusive
+    var days_left = Math.ceil(time_left_ms / ms_per_day);
     document.getElementById("display_date").innerHTML = days_left;
 
     function totalWeeks() {

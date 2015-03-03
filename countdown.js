@@ -34,7 +34,7 @@ function totalDays() {
                 actual_days -= 1;
             }
 
-			document.getElementById("actual_days").innerHTML = actual_days;
+	    document.getElementById("actual_days").innerHTML = actual_days;
         }
         weekdays();
     }

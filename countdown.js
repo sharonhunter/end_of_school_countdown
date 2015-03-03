@@ -11,8 +11,9 @@ function totalDays() {
     
     var ms_per_day = 24 * 60 * 60 * 1000;
     var time_left_ms = (end_of_school.getTime() - today.getTime());
-    //Math.ceil makes end_date inclusive
-    var days_left = Math.ceil(time_left_ms / ms_per_day);
+    
+    // + 1 at end makes today inclusive in span
+    var days_left = Math.ceil(time_left_ms / ms_per_day) + 1;
     document.getElementById("display_date").innerHTML = days_left;
 
     function totalWeeks() {
@@ -22,11 +23,21 @@ function totalDays() {
         function weekdays() {
             //subtract 2 weekend days from each week remaining
             var actual_days = days_left - (weeks * 2);
-            document.getElementById("actual_days").innerHTML = actual_days;
+            
+            // Subtract weekend contained in an overlap with week == 0   
+            if (today.getDay() - end_of_school.getDay() > 1) {
+                actual_days -= 2;
+            }
+
+            // Remove today if today is Sunday and end_of_school is before Saturday
+            if (today.getDay() == 0 && end_of_school.getDay() != 6) {
+                actual_days -= 1;
+            }
+
+			document.getElementById("actual_days").innerHTML = actual_days;
         }
         weekdays();
     }
     totalWeeks();
 }
-
 totalDays();
